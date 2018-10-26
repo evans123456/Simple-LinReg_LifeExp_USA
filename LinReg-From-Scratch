@@ -1,0 +1,64 @@
+#Import Libraries to use
+In [1]: import pandas as pd
+
+In [2]: import numpy as np
+
+In [3]: import matplotlib.pyplot as plt
+
+#Load and Import Data using Pandas
+In [4]: data = pd.read_csv("E:/lifeexpectancy_usa.csv")
+
+In [8]: data.head()
+Out[8]: 
+LOCATION INDICATOR SUBJECT MEASURE FREQUENCY TIME Value Flag Codes
+0 USA LIFEEXP MEN YR A 1960 66.6 NaN
+1 USA LIFEEXP MEN YR A 1961 67.1 NaN
+2 USA LIFEEXP MEN YR A 1962 66.9 NaN
+3 USA LIFEEXP MEN YR A 1963 66.6 NaN
+4 USA LIFEEXP MEN YR A 1964 66.8 NaN
+
+In [9]: X = data['TIME'].values
+
+In [10]: Y = data['Value'].values
+
+In [11]: mean_x = np.mean(X)
+    ...: mean_y = np.mean(Y)
+    ...: 
+
+In [12]: m = len(X)
+
+In [13]: numer = 0
+    ...: denom = 0
+    ...: for i in range(m):
+    ...: numer += (X[i] - mean_x) * (Y[i] - mean_y)
+    ...: denom += (X[i] - mean_x) ** 2
+    ...: b1 = numer / denom
+    ...: b0 = mean_y - (b1 * mean_x)
+    ...: 
+    ...: # Print coefficients
+    ...: print(b1, b0)
+    ...: 
+(0.20135467980295568, -328.81766485178463)
+
+
+
+In [19]: # Plotting Values and Regression Line
+    ...: 
+    ...: max_x = np.max(X) + 10
+    ...: min_x = np.min(X) - 10
+    ...: 
+    ...: # Calculating line values x and y
+    ...: x = np.linspace(min_x, max_x, 10)
+    ...: y = b0 + b1 * x
+    ...: 
+    ...: # Ploting Line
+    ...: plt.plot(x, y, color='#58b970', label='Regression Line')
+    ...: # Ploting Scatter Points
+    ...: plt.scatter(X, Y, c='#ef5423', label='Scatter Plot')
+    ...: 
+    ...: plt.xlabel('Period in Years')
+    ...: plt.ylabel('Value in Years')
+    ...: plt.legend()
+    ...: plt.show()
+    ...: 
+
