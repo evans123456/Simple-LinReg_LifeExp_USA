@@ -61,4 +61,28 @@ In [19]: # Plotting Values and Regression Line
     ...: plt.legend()
     ...: plt.show()
     ...: 
+    
+
+In [53]: 
+In [53]: rmse = 0
+    ...: for i in range(m):
+    ...:     y_pred = b0 + b1 * X[i]
+    ...:     rmse += (Y[i] - y_pred) ** 2
+    ...: rmse = np.sqrt(rmse/m)
+    ...: print(rmse)
+    ...: 
+0.421719563159
+
+
+
+In [54]: ss_t = 0
+    ...: ss_r = 0
+    ...: for i in range(m):
+    ...:     y_pred = b0 + b1 * X[i]
+    ...:     ss_t += (Y[i] - mean_y) ** 2
+    ...:     ss_r += (Y[i] - y_pred) ** 2
+    ...: r2 = 1 - (ss_r/ss_t)
+    ...: print(r2)
+    ...: 
+0.98405196071
 
